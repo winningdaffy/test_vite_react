@@ -12,10 +12,10 @@ function App() {
         <h1>{message}</h1>
         <div className="content">
           <TonConnectButton />
-          <button onClick={() => setMessage('你点击了按钮！')}>
+          {/* <button onClick={() => setMessage('你点击了按钮！')}>
             点击我
-          </button>
-          <p>这是一个使用Vite和React创建的简单前端应用</p>
+          </button> */}
+          <p>这是一个连接TON Connect的demo</p>
         </div>
       </div>
     </TonConnectUIProvider>
