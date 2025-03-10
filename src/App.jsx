@@ -333,8 +333,8 @@ function App() {
         <Header />
         <h1>{message}</h1>
         <div className="content">
-          {/* <WalletInfo />
-          <PurchaseCard /> */}
+          <WalletInfo />
+          <PurchaseCard />
         </div>
       </div>
     </TonConnectUIProvider>
