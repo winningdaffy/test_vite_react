@@ -36,7 +36,7 @@ const PurchaseCard = () => {
       return;
     }
 
-    const nanoAmount = (parseFloat(amount) * 1e9).toString();
+    const nanoAmount = (parseFloat(amount)).toString();
 
     const transaction = {
       validUntil: Math.floor(Date.now() / 1000) + 60,
