@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TonConnect from '@tonconnect/sdk';
 import { TonConnectUIProvider, TonConnectButton, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react';
 import './App.css'
@@ -81,8 +81,8 @@ function App() {
   const [message, setMessage] = useState('Wallet demo')
 
   // 解析 Telegram 参数
-  const tgParams = Telegram.WebApp.start_param
-    ? JSON.parse(decodeURIComponent(Telegram.WebApp.start_param))
+  const tgParams = (typeof window !== 'undefined' && window.Telegram?.WebApp?.start_param)
+    ? JSON.parse(decodeURIComponent(window.Telegram.WebApp.start_param))
     : null;
 
   return (
