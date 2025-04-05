@@ -81,8 +81,9 @@ function App() {
   const [message, setMessage] = useState('Wallet demo')
 
   // 解析 Telegram 参数
-  const tgParams = (typeof window !== 'undefined' && window.Telegram?.WebApp?.start_param)
-    ? JSON.parse(decodeURIComponent(window.Telegram.WebApp.start_param))
+  const rawStartParam = window?.Telegram?.WebApp?.start_param || null;
+  const tgParams = rawStartParam
+    ? JSON.parse(decodeURIComponent(rawStartParam))
     : null;
 
   return (
@@ -344,9 +345,15 @@ function App() {
           <WalletInfo />
           <PurchaseCard />
         </div>
-        {tgParams?.streamer_id && (
-          <h1>{tgParams.streamer_id}</h1>
-        )}
+        <div>
+          <p>原始参数：{rawStartParam}</p>
+          {tgParams && (
+            <div>
+              <p>解析后参数：</p>
+              <pre>{JSON.stringify(tgParams, null, 2)}</pre>
+            </div>
+          )}
+        </div>
       </div>
     </TonConnectUIProvider>
   )
