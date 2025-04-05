@@ -84,7 +84,10 @@ function App() {
   const hasWindow = typeof window !== 'undefined';
   const hasTelegram = hasWindow && 'Telegram' in window;
   const hasWebApp = hasTelegram && 'WebApp' in window.Telegram;
-  const rawStartParam = hasWebApp ? window.Telegram.WebApp.start_param || "未传入参数" : "WebApp 未初始化";
+  const rawStartParam = hasWebApp ? window.Telegram.WebApp.initDataUnsafe.start_param || "未传入参数" : "WebApp 未初始化";
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const startParam = urlParams.get('tgWebAppStartParam');
 
   return (
     <TonConnectUIProvider
@@ -350,6 +353,7 @@ function App() {
           <p>Telegram 对象: {hasTelegram ? "存在" : "不存在"}</p>
           <p>WebApp 对象: {hasWebApp ? "存在" : "不存在"}</p>
           <p>start_param: {rawStartParam}</p>
+          <p>start_param of tgWebAppStartParam: {startParam}</p>
         </div>
       </div>
     </TonConnectUIProvider>
