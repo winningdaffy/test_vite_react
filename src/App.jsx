@@ -89,6 +89,11 @@ function App() {
   const urlParams = new URLSearchParams(window.location.search);
   const startParam = urlParams.get('tgWebAppStartParam');
 
+  // 获取 Telegram 用户信息
+  const initData = hasWebApp ? window.Telegram.WebApp.initDataUnsafe : null;
+  const userId = initData?.user?.id || '未登录';
+  const userName = initData?.user?.username || '未知用户';
+
   return (
     <TonConnectUIProvider
       manifestUrl="https://test-vite-react-git-main-winningdaffys-projects.vercel.app//tonconnect-manifest.json"
@@ -354,6 +359,8 @@ function App() {
           <p>WebApp 对象: {hasWebApp ? "存在" : "不存在"}</p>
           <p>start_param: {rawStartParam}</p>
           <p>start_param of tgWebAppStartParam: {startParam}</p>
+          <p>Telegram ID: {userId}</p>
+          <p>用户名: {userName}</p>
         </div>
       </div>
     </TonConnectUIProvider>
