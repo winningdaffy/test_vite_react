@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TonConnect from '@tonconnect/sdk';
 import { TonConnectUIProvider, TonConnectButton, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react';
 import './App.css'
@@ -78,6 +79,11 @@ const PurchaseCard = () => {
 
 function App() {
   const [message, setMessage] = useState('Wallet demo')
+
+  // 解析 Telegram 参数
+  const tgParams = Telegram.WebApp.start_param
+    ? JSON.parse(decodeURIComponent(Telegram.WebApp.start_param))
+    : null;
 
   return (
     <TonConnectUIProvider
@@ -338,6 +344,9 @@ function App() {
           <WalletInfo />
           <PurchaseCard />
         </div>
+        {tgParams?.streamer_id && (
+          <h1>{tgParams.streamer_id}</h1>
+        )}
       </div>
     </TonConnectUIProvider>
   )
