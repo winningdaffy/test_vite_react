@@ -80,11 +80,11 @@ const PurchaseCard = () => {
 function App() {
   const [message, setMessage] = useState('Wallet demo')
 
-  // 解析 Telegram 参数
-  const rawStartParam = window?.Telegram?.WebApp?.start_param || "empty";
-  // const tgParams = rawStartParam
-  //   ? JSON.parse(decodeURIComponent(rawStartParam))
-  //   : null;
+  // 检查 Telegram 相关对象
+  const hasWindow = typeof window !== 'undefined';
+  const hasTelegram = hasWindow && 'Telegram' in window;
+  const hasWebApp = hasTelegram && 'WebApp' in window.Telegram;
+  const rawStartParam = hasWebApp ? window.Telegram.WebApp.start_param || "未传入参数" : "WebApp 未初始化";
 
   return (
     <TonConnectUIProvider
@@ -346,13 +346,10 @@ function App() {
           <PurchaseCard />
         </div>
         <div>
-          <p>原始参数：{rawStartParam}</p>
-          {/* {tgParams && (
-            <div>
-              <p>解析后参数：</p>
-              <pre>{JSON.stringify(tgParams, null, 2)}</pre>
-            </div>
-          )} */}
+          <p>Window 对象: {hasWindow ? "存在" : "不存在"}</p>
+          <p>Telegram 对象: {hasTelegram ? "存在" : "不存在"}</p>
+          <p>WebApp 对象: {hasWebApp ? "存在" : "不存在"}</p>
+          <p>start_param: {rawStartParam}</p>
         </div>
       </div>
     </TonConnectUIProvider>
